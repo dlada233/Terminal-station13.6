@@ -4,29 +4,29 @@
 	bite_consumption = 5
 	max_volume = 80
 	foodtypes = NONE
-	eatverbs = list("slurp", "sip", "inhale", "drink")
+	eatverbs = list("喝了一口", "吸了一口", "吃了一口", "咽了一口")
 	venue_value = FOOD_PRICE_CHEAP
 
 /obj/item/food/bowled/make_germ_sensitive(mapload)
 	return // It's in a bowl
 
 /obj/item/food/bowled/wish
-	name = "wish soup"
-	desc = "I wish this was soup."
+	name = "许愿汤"
+	desc = "我许愿这是一碗汤."
 	icon_state = "wishsoup"
 	food_reagents = list(/datum/reagent/water = 10)
-	tastes = list("wishes" = 1)
+	tastes = list("愿望" = 1)
 
 /obj/item/food/bowled/wish/Initialize(mapload)
 	. = ..()
 	if(prob(25))
-		desc = "A wish come true!"
+		desc = "美梦成真!"
 		reagents.add_reagent(/datum/reagent/consumable/nutriment, 9)
 		reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 1)
 
 /obj/item/food/bowled/mammi
-	name = "Mammi"
-	desc = "A bowl of mushy bread and milk. It reminds you, not too fondly, of a bowel movement."
+	name = "婴儿食品糊"
+	desc = "一碗糊状的面包和牛奶."
 	icon_state = "mammi"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 11,
@@ -36,8 +36,8 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/bowled/spacylibertyduff
-	name = "spacy liberty duff"
-	desc = "Jello gelatin, from Alfred Hubbard's cookbook."
+	name = "宇宙果冻"
+	desc = "from Alfred Hubbard's cookbook."
 	icon_state = "spacylibertyduff"
 	bite_consumption = 3
 	food_reagents = list(
@@ -45,13 +45,13 @@
 		/datum/reagent/drug/mushroomhallucinogen = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
-	tastes = list("jelly" = 1, "mushroom" = 1)
+	tastes = list("果酱" = 1, "蘑菇" = 1)
 	foodtypes = VEGETABLES
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/bowled/amanitajelly
-	name = "amanita jelly"
-	desc = "Looks curiously toxic."
+	name = "鹅膏菌果冻"
+	desc = "看起来很有毒。"
 	icon_state = "amanitajelly"
 	bite_consumption = 3
 	food_reagents = list(
@@ -60,6 +60,6 @@
 		/datum/reagent/toxin/amatoxin = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
-	tastes = list("jelly" = 1, "mushroom" = 1)
+	tastes = list("果酱" = 1, "蘑菇" = 1)
 	foodtypes = VEGETABLES | TOXIC
 	crafting_complexity = FOOD_COMPLEXITY_2

@@ -8,15 +8,15 @@
 		/datum/reagent/consumable/nutriment/protein = 5,
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
-	tastes = list("bun" = 2, "beef patty" = 4)
+	tastes = list("圆面包" = 2, "汉堡排" = 4)
 	foodtypes = GRAIN | MEAT //lettuce doesn't make burger a vegetable.
 	eat_time = 15 //Quick snack
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/plain
-	name = "plain burger"
-	desc = "The cornerstone of every nutritious breakfast."
+	name = "原味汉堡"
+	desc = "每一顿营养早餐的基石."
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
 		/datum/reagent/consumable/nutriment/protein = 6,
@@ -32,22 +32,22 @@
 	if(prob(1))
 		new/obj/effect/particle_effect/fluid/smoke(get_turf(src))
 		playsound(src, 'sound/effects/smoke.ogg', 50, TRUE)
-		visible_message(span_warning("Oh, ye gods! [src] is ruined! But what if...?"))
-		name = "steamed ham"
+		visible_message(span_warning("啊,我靠! [src] 被搞砸了! 但似乎好像...?"))
+		name = "steamed hams"
 		desc = pick("Ahh, Head of Personnel, welcome. I hope you're prepared for an unforgettable luncheon!",
 			"And you call these steamed hams despite the fact that they are obviously microwaved?",
 			"Aurora Station 13? At this time of shift, in this time of year, in this sector of space, localized entirely within your freezer?",
 			"You know, these hamburgers taste quite similar to the ones they have at the Maltese Falcon.")
 
 /obj/item/food/burger/human
-	name = "human burger"
-	desc = "A bloody burger."
+	name = "人肉堡"
+	desc = "血淋淋的汉堡."
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
-	tastes = list("bun" = 2, "long pig" = 4)
+	tastes = list("圆面包" = 2, "两脚羊" = 4)
 	foodtypes = MEAT | GRAIN | GORE
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -57,80 +57,80 @@
 	var/obj/item/food/patty/human/human_patty = locate(/obj/item/food/patty/human) in contents
 	for(var/datum/material/meat/mob_meat/mob_meat_material in human_patty.custom_materials)
 		if(mob_meat_material.subjectname)
-			name = "[mob_meat_material.subjectname] burger"
+			name = "[mob_meat_material.subjectname] 堡"
 		else if(mob_meat_material.subjectjob)
-			name = "[mob_meat_material.subjectjob] burger"
+			name = "[mob_meat_material.subjectjob] 堡"
 
 /obj/item/food/burger/corgi
-	name = "corgi burger"
+	name = "柯基肉汉堡"
 	desc = "You monster."
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
-	tastes = list("bun" = 4, "corgi meat" = 2)
+	tastes = list("圆面包" = 4, "柯基肉" = 2)
 	foodtypes = GRAIN | MEAT | GORE
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/appendix
-	name = "appendix burger"
-	desc = "Tastes like appendicitis."
+	name = "阑尾汉堡"
+	desc = "有阑尾炎的味道."
 	icon_state = "appendixburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
-	tastes = list("bun" = 4, "grass" = 2)
+	tastes = list("圆面包" = 4, "阑尾炎" = 2)
 	foodtypes = GRAIN | MEAT | GORE
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/fish
-	name = "fillet -o- carp sandwich"
-	desc = "Almost like a carp is yelling somewhere... Give me back that fillet -o- carp, give me that carp."
+	name = "鱼肉三明治"
+	desc = "就像一条鲤鱼在某处大喊大叫,把鱼片还给我...把鱼片给我..."
 	icon_state = "fishburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
-	tastes = list("bun" = 4, "fish" = 4)
+	tastes = list("圆面包" = 4, "鱼肉" = 4)
 	foodtypes = GRAIN | SEAFOOD
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/tofu
-	name = "tofu burger"
-	desc = "What.. is that meat?"
+	name = "豆腐汉堡"
+	desc = "啊?这是什么肉?"
 	icon_state = "tofuburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 3,
 	)
-	tastes = list("bun" = 4, "tofu" = 4)
+	tastes = list("圆面包" = 4, "豆腐" = 4)
 	foodtypes = GRAIN | VEGETABLES
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/roburger
-	name = "roburger"
-	desc = "The lettuce is the only organic component. Beep."
+	name = "赛堡"
+	desc = "生菜是唯一的有机成分. beep."
 	icon_state = "roburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
 		/datum/reagent/cyborg_mutation_nanomachines = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
-	tastes = list("bun" = 4, "lettuce" = 2, "sludge" = 1)
+	tastes = list("圆面包" = 4, "生菜" = 2, "油泥" = 1)
 	foodtypes = GRAIN | TOXIC
 	venue_value = FOOD_PRICE_EXOTIC
 
 /obj/item/food/burger/roburger/big
-	desc = "This massive patty looks like poison. Beep."
+	desc = "这个巨大的肉饼看起来像毒药. Beep."
 	max_volume = 120
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 11,
@@ -139,50 +139,50 @@
 	)
 
 /obj/item/food/burger/xeno
-	name = "xenoburger"
-	desc = "Smells caustic. Tastes like heresy."
+	name = "异形汉堡"
+	desc = "味道刺鼻,口感邪异."
 	icon_state = "xburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
-	tastes = list("bun" = 4, "acid" = 4)
+	tastes = list("圆面包" = 4, "酸液" = 4)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/bearger
-	name = "bearger"
-	desc = "Best served rawr."
+	name = "熊堡"
+	desc = "最佳生鲜."
 	icon_state = "bearger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
-	tastes = list("bun" = 2, "meat" = 2, "salmon" = 2)
+	tastes = list("圆面包" = 2, "肉" = 2, "鲑鱼" = 2)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/clown
-	name = "clown burger"
-	desc = "This tastes funny..."
+	name = "小丑堡"
+	desc = "他妈的有点搞笑啊..."
 	icon_state = "clownburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
-	tastes = list("bun" = 2, "a bad joke" = 4)
+	tastes = list("圆面包" = 2, "烂笑话" = 4)
 	foodtypes = GRAIN | FRUIT
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/mime
-	name = "mime burger"
-	desc = "Its taste defies language."
+	name = "默剧堡"
+	desc = "它的味道是语言无法形容的."
 	icon_state = "mimeburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -195,8 +195,8 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/brain
-	name = "brainburger"
-	desc = "A strange looking burger. It looks almost sentient."
+	name = "脑堡"
+	desc = "看起来很奇怪的汉堡,它看起来还是有知觉的."
 	icon_state = "brainburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -204,14 +204,14 @@
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 		/datum/reagent/consumable/nutriment/protein = 6,
 	)
-	tastes = list("bun" = 4, "brains" = 2)
+	tastes = list("圆面包" = 4, "脑子" = 2)
 	foodtypes = GRAIN | MEAT | GORE
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/ghost
-	name = "ghost burger"
-	desc = "Too Spooky!"
+	name = "幽灵堡"
+	desc = "太哈人!"
 	icon_state = "ghostburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 5,
@@ -219,7 +219,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 12,
 		/datum/reagent/consumable/salt = 5,
 	)
-	tastes = list("bun" = 2, "ectoplasm" = 4)
+	tastes = list("圆面包" = 2, "灵质" = 4)
 	foodtypes = GRAIN
 	alpha = 170
 	verb_say = "moans"
@@ -242,7 +242,7 @@
 	var/paranormal_activity = rand(100)
 	switch(paranormal_activity)
 		if(97 to 100)
-			audible_message("[src] rattles a length of chain.")
+			audible_message("[src] 晃动铁链.")
 			playsound(loc, 'sound/misc/chain_rattling.ogg', 300, TRUE)
 		if(91 to 96)
 			say(pick("OoOoOoo.", "OoooOOooOoo!!"))
@@ -257,7 +257,7 @@
 		if(62 to 64)
 			playsound(loc, pick('sound/hallucinations/i_see_you1.ogg', 'sound/hallucinations/i_see_you2.ogg'), 50, TRUE, ignore_walls = FALSE)
 		if(61)
-			visible_message("[src] spews out a glob of ectoplasm!")
+			visible_message("[src] 溢出一团灵质!")
 			new /obj/effect/decal/cleanable/greenglow/ecto(loc)
 			playsound(loc, 'sound/effects/splat.ogg', 200, TRUE)
 
@@ -266,8 +266,8 @@
 	. = ..()
 
 /obj/item/food/burger/red
-	name = "red burger"
-	desc = "Perfect for hiding the fact that it's burnt to a crisp."
+	name = "红色堡"
+	desc = "完美地掩盖了它被烧焦的事实."
 	icon_state = "cburger"
 	color = COLOR_RED
 	food_reagents = list(
@@ -276,13 +276,13 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/red = 10,
 	)
-	tastes = list("bun" = 2, "red" = 2)
+	tastes = list("圆面包" = 2, "红色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/orange
-	name = "orange burger"
-	desc = "Contains 0% juice."
+	name = "橙色堡"
+	desc = "0添加橙汁."
 	icon_state = "cburger"
 	color = COLOR_ORANGE
 	food_reagents = list(
@@ -291,13 +291,13 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/orange = 10,
 	)
-	tastes = list("bun" = 2, "orange" = 2)
+	tastes = list("圆面包" = 2, "橙色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/yellow
-	name = "yellow burger"
-	desc = "Bright to the last bite."
+	name = "黄色堡"
+	desc = "直到最后一口都很明亮."
 	icon_state = "cburger"
 	color = COLOR_YELLOW
 	food_reagents = list(
@@ -306,13 +306,13 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/yellow = 10,
 	)
-	tastes = list("bun" = 2, "yellow" = 2)
+	tastes = list("圆面包" = 2, "黄色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/green
-	name = "green burger"
-	desc = "It's not tainted meat, it's painted meat!"
+	name = "绿色堡"
+	desc = "这不是变异了的肉,是涂了漆的肉!"
 	icon_state = "cburger"
 	color = COLOR_GREEN
 	food_reagents = list(
@@ -321,13 +321,13 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/green = 10,
 	)
-	tastes = list("bun" = 2, "green" = 2)
+	tastes = list("圆面包" = 2, "绿色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/blue
-	name = "blue burger"
-	desc = "Is this blue rare?"
+	name = "蓝色堡"
+	desc = "蓝色品质,五金一件"
 	icon_state = "cburger"
 	color = COLOR_BLUE
 	food_reagents = list(
@@ -336,13 +336,13 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/blue = 10,
 	)
-	tastes = list("bun" = 2, "blue" = 2)
+	tastes = list("圆面包" = 2, "蓝色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/purple
-	name = "purple burger"
-	desc = "Regal and low class at the same time."
+	name = "紫色堡"
+	desc = "贵族和下层阶级同时存在."
 	icon_state = "cburger"
 	color = COLOR_PURPLE
 	food_reagents = list(
@@ -351,13 +351,13 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/purple = 10,
 	)
-	tastes = list("bun" = 2, "purple" = 2)
+	tastes = list("圆面包" = 2, "紫色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/black
-	name = "black burger"
-	desc = "This is overcooked."
+	name = "黑色汉堡"
+	desc = "烧糊了."
 	icon_state = "cburger"
 	color = COLOR_ALMOST_BLACK
 	food_reagents = list(
@@ -366,13 +366,13 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/black = 10,
 	)
-	tastes = list("bun" = 2, "black" = 2)
+	tastes = list("圆面包" = 2, "黑色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/white
-	name = "white burger"
-	desc = "Delicous titanium!"
+	name = "白色汉堡"
+	desc = "美味的钛!"
 	icon_state = "cburger"
 	color = COLOR_WHITE
 	food_reagents = list(
@@ -381,44 +381,44 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/colorful_reagent/powder/white = 10,
 	)
-	tastes = list("bun" = 2, "white" = 2)
+	tastes = list("圆面包" = 2, "白色" = 2)
 	foodtypes = GRAIN | MEAT
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/spell
-	name = "spell burger"
-	desc = "This is absolutely Ei Nath."
+	name = "巫师堡"
+	desc = "这就是魔法旋风!"
 	icon_state = "spellburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
 		/datum/reagent/consumable/nutriment/protein = 5,
 		/datum/reagent/consumable/nutriment/vitamin = 10,
 	)
-	tastes = list("bun" = 4, "magic" = 2)
+	tastes = list("圆面包" = 4, "魔法" = 2)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/bigbite
-	name = "big bite burger"
-	desc = "Forget the Big Mac. THIS is the future!"
+	name = "大亨堡"
+	desc = "忘了巨无霸吧,这才是未来!"
 	icon_state = "bigbiteburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
 		/datum/reagent/consumable/nutriment/protein = 10,
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
-	tastes = list("bun" = 2, "meat" = 10)
+	tastes = list("圆面包" = 2, "肉" = 10)
 	w_class = WEIGHT_CLASS_NORMAL
 	foodtypes = GRAIN | MEAT | DAIRY
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/jelly
-	name = "jelly burger"
-	desc = "Culinary delight..?"
+	name = "果酱汉堡"
+	desc = "创意厨房..?"
 	icon_state = "jellyburger"
-	tastes = list("bun" = 4, "jelly" = 2)
+	tastes = list("圆面包" = 4, "果酱" = 2)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -440,8 +440,8 @@
 	foodtypes = GRAIN | FRUIT
 
 /obj/item/food/burger/superbite
-	name = "super bite burger"
-	desc = "This is a mountain of a burger. FOOD!"
+	name = "超级大亨堡"
+	desc = "这是一座汉堡山. FOOD!"
 	icon_state = "superbiteburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 26,
@@ -451,20 +451,20 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	bite_consumption = 7
 	max_volume = 100
-	tastes = list("bun" = 4, "type two diabetes" = 10)
+	tastes = list("圆面包" = 4, "二型糖尿病" = 10)
 	foodtypes = GRAIN | MEAT | DAIRY
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_5
 
 /obj/item/food/burger/superbite/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] starts to eat [src] in one bite, it looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] 开始尝试一口吃下 [src] , 这看起来是 [user.p_theyre()] 在进行自杀行为!"))
 	var/datum/component/edible/component = GetComponent(/datum/component/edible)
 	component?.TakeBite(user, user)
 	return OXYLOSS
 
 /obj/item/food/burger/fivealarm
-	name = "five alarm burger"
-	desc = "HOT! HOT!"
+	name = "火警堡"
+	desc = "热! 热!"
 	icon_state = "fivealarmburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -473,58 +473,58 @@
 		/datum/reagent/consumable/condensedcapsaicin = 5,
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
-	tastes = list("extreme heat" = 4, "bun" = 2)
+	tastes = list("炽热" = 4, "圆面包" = 2)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/rat
-	name = "rat burger"
-	desc = "Pretty much what you'd expect..."
+	name = "鼠堡"
+	desc = "背起了鼠堡..."
 	icon_state = "ratburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
-	tastes = list("dead rat" = 4, "bun" = 2)
+	tastes = list("死老鼠" = 4, "圆面包" = 2)
 	foodtypes = GRAIN | MEAT | GORE
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/baseball
-	name = "home run baseball burger"
-	desc = "It's still warm. The steam coming off of it looks like baseball."
+	name = "全垒打棒球堡"
+	desc = "它还是热的,上面冒着与空气摩擦产生的蒸汽."
 	icon_state = "baseball"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 5,
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
-	tastes = list("bun" = 2, "a home run" = 4)
+	tastes = list("圆面包" = 2, "全垒打" = 4)
 	foodtypes = GRAIN | GROSS
 	custom_price = PAYCHECK_CREW * 0.8
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/baconburger
-	name = "bacon burger"
-	desc = "The perfect combination of all things American."
+	name = "培根堡"
+	desc = "美式的完美组合."
 	icon_state = "baconburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
-	tastes = list("bacon" = 4, "bun" = 2)
+	tastes = list("培根" = 4, "圆面包" = 2)
 	foodtypes = GRAIN | MEAT
 	custom_premium_price = PAYCHECK_CREW * 1.6
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/empoweredburger
-	name = "empowered burger"
-	desc = "It's shockingly good, if you live off of electricity that is."
+	name = "能源堡"
+	desc = "触电般的好"
 	icon_state = "empoweredburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 5,
@@ -532,34 +532,34 @@
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 		/datum/reagent/consumable/liquidelectricity/enriched = 6,
 	)
-	tastes = list("bun" = 2, "pure electricity" = 4)
+	tastes = list("圆面包" = 2, "能量" = 4)
 	foodtypes = GRAIN | TOXIC
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/burger/catburger
-	name = "catburger"
-	desc = "Finally those cats and catpeople are worth something!"
+	name = "猫堡"
+	desc = "那些猫和猫人终于有点价值了!"
 	icon_state = "catburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
 		/datum/reagent/consumable/nutriment/protein = 3,
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
-	tastes = list("bun" = 4, "meat" = 2, "cat" = 2)
+	tastes = list("圆面包" = 4, "肉" = 2, "猫味" = 2)
 	foodtypes = GRAIN | MEAT | GORE
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/crab
-	name = "crab burger"
-	desc = "A delicious patty of the crabby kind, slapped in between a bun."
+	name = "蟹肉堡"
+	desc = "一片美味的蟹肉饼夹在两片圆面包中."
 	icon_state = "crabburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
 		/datum/reagent/consumable/nutriment/protein = 5,
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
-	tastes = list("bun" = 2, "crab meat" = 4)
+	tastes = list("圆面包" = 2, "蟹肉饼" = 4)
 	foodtypes = GRAIN | SEAFOOD
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -573,14 +573,14 @@
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
-	tastes = list("bun" = 2, "assistant" = 4)
+	tastes = list("圆面包" = 2, "assistant" = 4)
 	foodtypes = GRAIN | MEAT | DAIRY
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_4
 
 /obj/item/food/burger/rib
-	name = "mcrib"
-	desc = "An elusive rib shaped burger with limited availablity across the galaxy. Not as good as you remember it."
+	name = "烤汁猪柳堡"
+	desc = "一种难以捉摸的肋骨形状的汉堡，在整个银河系都是限量供应的.但不如你记忆中的好."
 	icon_state = "mcrib"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -588,14 +588,14 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/consumable/bbqsauce = 1,
 		)
-	tastes = list("bun" = 2, "pork patty" = 4)
+	tastes = list("圆面包" = 2, "烤汁猪柳" = 4)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/mcguffin
-	name = "mcguffin"
-	desc = "A cheap and greasy imitation of an eggs benedict."
+	name = "麦格芬"
+	desc = "对本尼迪克蛋的拙劣模仿."
 	icon_state = "mcguffin"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -603,14 +603,14 @@
 		/datum/reagent/consumable/nutriment/protein = 7,
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
-	tastes = list("muffin" = 2, "bacon" = 3)
+	tastes = list("松饼" = 2, "培根" = 3)
 	foodtypes = GRAIN | MEAT | BREAKFAST
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/chicken
-	name = "chicken sandwich" //Apparently the proud people of Americlapstan object to this thing being called a burger. Apparently McDonald's just calls it a burger in Europe as to not scare and confuse us.
-	desc = "A delicious chicken sandwich, it is said the proceeds from this treat helps criminalize disarming people on the space frontier."
+	name = "鸡肉三明治" //Apparently the proud people of Americlapstan object to this thing being called a burger. Apparently McDonald's just calls it a burger in Europe as to not scare and confuse us.
+	desc = "这是一种美味的鸡肉三明治."
 	icon_state = "chickenburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -619,21 +619,21 @@
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 		/datum/reagent/consumable/nutriment/fat/oil = 2,
 	)
-	tastes = list("bun" = 2, "chicken" = 4, "God's covenant" = 1)
+	tastes = list("圆面包" = 2, "鸡肉" = 4, "上帝圣约" = 1)
 	foodtypes = GRAIN | MEAT | FRIED
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/burger/cheese
-	name = "cheese burger"
-	desc = "This noble burger stands proudly clad in golden cheese."
+	name = "芝士汉堡"
+	desc = "这个高贵的汉堡骄傲地包裹着金色的奶酪。"
 	icon_state = "cheeseburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
 		/datum/reagent/consumable/nutriment/protein = 7,
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
-	tastes = list("bun" = 2, "beef patty" = 4, "cheese" = 3)
+	tastes = list("圆面包" = 2, "汉堡排" = 4, "芝士" = 3)
 	foodtypes = GRAIN | MEAT | DAIRY
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -644,8 +644,8 @@
 		icon_state = "cheeseburgeralt"
 
 /obj/item/food/burger/crazy
-	name = "crazy hamburger"
-	desc = "This looks like the sort of food that a demented clown in a trenchcoat would make."
+	name = "疯狂堡"
+	desc = "这看起来像是一个穿着风衣的疯狂小丑会做的堡."
 	icon_state = "crazyburger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -654,7 +654,7 @@
 		/datum/reagent/consumable/condensedcapsaicin = 3,
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
-	tastes = list("bun" = 2, "beef patty" = 4, "cheese" = 2, "beef soaked in chili" = 3, "a smoking flare" = 2)
+	tastes = list("圆面包" = 2, "汉堡排" = 4, "芝士" = 2, "辣牛肉" = 3, "燃烧的信号弹" = 2)
 	foodtypes = GRAIN | MEAT | DAIRY
 	crafting_complexity = FOOD_COMPLEXITY_4
 
@@ -670,22 +670,22 @@
 
 // empty burger you can customize
 /obj/item/food/burger/empty
-	name = "burger"
-	desc = "A crazy, custom burger made by a mad cook."
+	name = "汉堡"
+	desc = "一款疯狂的手工汉堡,出自一位疯狂的厨师的疯狂的手."
 	icon_state = "custburg"
-	tastes = list("bun")
+	tastes = list("圆面包")
 	foodtypes = GRAIN
 
 /obj/item/food/burger/sloppy_moe
-	name = "sloppy moe"
-	desc = "Ground meat mixed with onions and barbeque sauce, sloppily plopped onto a burger bun. Delicious, but guaranteed to get your hands dirty."
+	name = "碎肉堡"
+	desc = "肉酱混合着洋葱和其他调味品随意地夹在两片圆面包中间. 美味,但通常会弄脏你的手."
 	icon_state = "sloppy_moe"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
 		/datum/reagent/consumable/nutriment/protein = 8,
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
-	tastes = list("juicy meat" = 4, "BBQ sauce" = 3, "onions" = 2, "bun" = 2)
+	tastes = list("肉酱" = 4, "烧烤酱" = 3, "洋葱" = 2, "圆面包" = 2)
 	foodtypes = GRAIN | MEAT | VEGETABLES
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3

@@ -1,12 +1,12 @@
 //Note for this file: All the raw pastries should not have microwave results, use baking instead. All cooked products can use baking, but should also support a microwave.
 
 /obj/item/food/dough
-	name = "dough"
-	desc = "A piece of dough."
+	name = "面团"
+	desc = "一团面."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "dough"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 6)
-	tastes = list("dough" = 1)
+	tastes = list("生面团" = 1)
 	foodtypes = GRAIN
 	crafting_complexity = FOOD_COMPLEXITY_0
 
@@ -18,12 +18,12 @@
 	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/flatdough, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten")
 
 /obj/item/food/flatdough
-	name = "flat dough"
-	desc = "A flattened dough."
+	name = "生面饼"
+	desc = "擀平的面团."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "flat dough"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 6)
-	tastes = list("dough" = 1)
+	tastes = list("生面团" = 1)
 	foodtypes = GRAIN
 	crafting_complexity = FOOD_COMPLEXITY_0
 
@@ -35,12 +35,12 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/doughslice, 3, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice")
 
 /obj/item/food/pizzabread
-	name = "pizza bread"
-	desc = "Add ingredients to make a pizza."
+	name = "披萨饼坯"
+	desc = "加入配料制作披萨."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "pizzabread"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 7)
-	tastes = list("bread" = 1)
+	tastes = list("烤饼" = 1)
 	foodtypes = GRAIN
 	crafting_complexity = FOOD_COMPLEXITY_1
 
@@ -49,8 +49,8 @@
 	AddComponent(/datum/component/customizable_reagent_holder, /obj/item/food/pizza/margherita, CUSTOM_INGREDIENT_ICON_SCATTER, max_ingredients = 12)
 
 /obj/item/food/doughslice
-	name = "dough slice"
-	desc = "A slice of dough. Can be cooked into a bun."
+	name = "切块面团"
+	desc = "一小块生面团,能做成圆面包."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "doughslice"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 2)
@@ -66,13 +66,13 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/bait/doughball, 5, 3 SECONDS, screentip_verb = "Slice")
 
 /obj/item/food/bun
-	name = "bun"
-	desc = "A base for any self-respecting burger."
+	name = "圆面包"
+	desc = "每个汉堡的自尊基础."
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "bun"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 3)
 	w_class = WEIGHT_CLASS_SMALL
-	tastes = list("bun" = 1) // the bun tastes of bun.
+	tastes = list("圆面包" = 1) // the bun tastes of bun.
 	foodtypes = GRAIN
 	crafting_complexity = FOOD_COMPLEXITY_1
 
@@ -81,12 +81,12 @@
 	AddComponent(/datum/component/customizable_reagent_holder, /obj/item/food/burger/empty, CUSTOM_INGREDIENT_ICON_STACKPLUSTOP)
 
 /obj/item/food/cakebatter
-	name = "cake batter"
-	desc = "Bake it to get a cake."
+	name = "蛋糕糊"
+	desc = "把它烤一下做成蛋糕."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "cakebatter"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 9)
-	tastes = list("batter" = 1)
+	tastes = list("生面糊" = 1)
 	foodtypes = GRAIN | DAIRY
 	crafting_complexity = FOOD_COMPLEXITY_1
 
@@ -97,12 +97,12 @@
 	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/piedough, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten")
 
 /obj/item/food/piedough
-	name = "pie dough"
-	desc = "Cook it to get a pie."
+	name = "馅饼糊"
+	desc = "把它烤一下做成派."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "piedough"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 9)
-	tastes = list("dough" = 1)
+	tastes = list("生面糊" = 1)
 	foodtypes = GRAIN | DAIRY
 	crafting_complexity = FOOD_COMPLEXITY_1
 
@@ -113,13 +113,13 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/rawpastrybase, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice")
 
 /obj/item/food/rawpastrybase
-	name = "raw pastry base"
-	desc = "Must be cooked before use."
+	name = "生糕点酥皮"
+	desc = "使用前一定要弄熟."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawpastrybase"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	w_class = WEIGHT_CLASS_SMALL
-	tastes = list("raw pastry" = 1)
+	tastes = list("生酥皮" = 1)
 	foodtypes = GRAIN | DAIRY
 	crafting_complexity = FOOD_COMPLEXITY_1
 
@@ -127,12 +127,12 @@
 	AddComponent(/datum/component/bakeable, /obj/item/food/pastrybase, rand(20 SECONDS, 25 SECONDS), TRUE, TRUE)
 
 /obj/item/food/pastrybase
-	name = "pastry base"
-	desc = "A base for any self-respecting pastry."
+	name = "糕点酥皮"
+	desc = "是任何糕点的基础."
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "pastrybase"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 3)
 	w_class = WEIGHT_CLASS_SMALL
-	tastes = list("pastry" = 1)
+	tastes = list("糕点" = 1)
 	foodtypes = GRAIN | DAIRY
 	crafting_complexity = FOOD_COMPLEXITY_2

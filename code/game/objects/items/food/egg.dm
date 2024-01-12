@@ -2,23 +2,24 @@
 ////////////////////////////////////////////EGGS////////////////////////////////////////////
 
 /obj/item/food/chocolateegg
-	name = "chocolate egg"
-	desc = "Such, sweet, fattening food."
+	name = "巧克力蛋"
+	desc = "这种又甜又肥的食物."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "chocolateegg"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/sugar = 2, /datum/reagent/consumable/coco = 2, /datum/reagent/consumable/nutriment/vitamin = 1)
-	tastes = list("chocolate" = 4, "sweetness" = 1)
+	tastes = list("巧克力" = 4, "甜腻" = 1)
 	foodtypes = JUNKFOOD | SUGAR
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_TINY
 	crafting_complexity = FOOD_COMPLEXITY_2
 
+/// 计数器通过投掷鸡蛋孵化小鸡的数量，minecraft风格。如果这个值超过max_chicks的定义，小鸡将不会从扔的鸡蛋中出现。
 /// Counter for number of chicks hatched by throwing eggs, minecraft style. Chicks will not emerge from thrown eggs if this value exceeds the MAX_CHICKENS define.
 GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 
 /obj/item/food/egg
-	name = "egg"
-	desc = "An egg!"
+	name = "鸡蛋"
+	desc = "一个鸡蛋!"
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "egg"
 	inhand_icon_state = "egg"
@@ -27,8 +28,9 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	w_class = WEIGHT_CLASS_TINY
 	ant_attracting = FALSE
 	decomp_type = /obj/item/food/egg/rotten
-	decomp_req_handle = TRUE //so laid eggs can actually become chickens
+	decomp_req_handle = TRUE //so laid eggs can actually become chickens 所以下的蛋可以变成鸡
 	/// How likely is it that a chicken will come out of here if we throw it?
+	/// 如果我们把一只鸡扔出去，它飞出来的可能性有多大?
 	var/chick_throw_prob = 13
 
 /obj/item/food/egg/make_bakeable()
@@ -38,8 +40,8 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	AddElement(/datum/element/microwavable, /obj/item/food/boiledegg)
 
 /obj/item/food/egg/organic
-	name = "organic egg"
-	desc = "A 100% natural egg from the best hens."
+	name = "土鸡蛋"
+	desc = "100%纯天然鸡蛋,产自最好的母鸡."
 	starting_reagent_purity = 1
 
 /obj/item/food/egg/rotten
@@ -54,7 +56,7 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	AddElement(/datum/element/microwavable, /obj/item/food/boiledegg/rotten)
 
 /obj/item/food/egg/gland
-	desc = "An egg! It looks weird..."
+	desc = "一个鸡蛋!看起来很奇怪……"
 
 /obj/item/food/egg/gland/Initialize(mapload)
 	. = ..()
@@ -64,7 +66,7 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
 /obj/item/food/egg/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	if (..()) // was it caught by a mob?
+	if (..()) // was it caught by a mob? 它被mob抓住了吗?
 		return
 
 	var/turf/hit_turf = get_turf(hit_atom)
@@ -74,16 +76,16 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	reagents.expose(hit_atom, TOUCH)
 	qdel(src)
 
-/// Spawn a baby chicken from throwing an egg
+/// Spawn a baby chicken from throwing an egg 从扔鸡蛋中孵出小鸡
 /obj/item/food/egg/proc/spawn_impact_chick(turf/spawn_turf)
 	var/chickens_remaining = MAX_CHICKENS - GLOB.chicks_from_eggs
 	if (chickens_remaining < 1)
 		return
-	var/spawned_chickens = prob(97) ? 1 : min(4, chickens_remaining) // We don't want to go over the limit
-	if (spawned_chickens > 1) // Chicken jackpot!
-		visible_message(span_notice("[spawned_chickens] chicks come out of the egg! Jackpot!"))
+	var/spawned_chickens = prob(97) ? 1 : min(4, chickens_remaining) // We don't want to go over the limit 我们不想超过限额
+	if (spawned_chickens > 1) // Chicken jackpot! 鸡大奖!
+		visible_message(span_notice("[spawned_chickens] 小鸡从蛋里面出来了,中大奖了!"))
 	else
-		visible_message(span_notice("A chick comes out of the cracked egg!"))
+		visible_message(span_notice("一只小鸡从破蛋里钻出来!"))
 	for(var/i in 1 to spawned_chickens)
 		new /mob/living/basic/chick(spawn_turf)
 		GLOB.chicks_from_eggs++
@@ -94,29 +96,29 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 		var/clr = crayon.crayon_color
 
 		if(!(clr in list("blue", "green", "mime", "orange", "purple", "rainbow", "red", "yellow")))
-			to_chat(usr, span_notice("[src] refuses to take on this colour!"))
+			to_chat(usr, span_notice("[src] 拒绝这种颜色!"))
 			return
 
-		to_chat(usr, span_notice("You colour [src] with [item]."))
+		to_chat(usr, span_notice("你用 [item] 给 [src] 上色."))
 		icon_state = "egg-[clr]"
 
 	else if(istype(item, /obj/item/stamp/clown))
 		var/clowntype = pick("grock", "grimaldi", "rainbow", "chaos", "joker", "sexy", "standard", "bobble",
 			"krusty", "bozo", "pennywise", "ronald", "jacobs", "kelly", "popov", "cluwne")
 		icon_state = "egg-clown-[clowntype]"
-		desc = "An egg that has been decorated with the grotesque, robustable likeness of a clown's face. "
-		to_chat(usr, span_notice("You stamp [src] with [item], creating an artistic and not remotely horrifying likeness of clown makeup."))
+		desc = "小丑蛋是一种被装饰成小丑脸的奇形怪状的蛋. "
+		to_chat(usr, span_notice("你用 [item] 给 [src] 印上,创造出一种艺术的,不那么恐怖的小丑妆容."))
 
 	else if(is_reagent_container(item))
 		var/obj/item/reagent_containers/dunk_test_container = item
 		if (!dunk_test_container.is_drainable() || !dunk_test_container.reagents.has_reagent(/datum/reagent/water))
 			return
 
-		to_chat(user, span_notice("You check if [src] is rotten."))
+		to_chat(user, span_notice("你检查 [src] 是否坏了."))
 		if(istype(src, /obj/item/food/egg/rotten))
-			to_chat(user, span_warning("[src] floats in the [dunk_test_container]!"))
+			to_chat(user, span_warning("[src] 在 [dunk_test_container] 中浮动!"))
 		else
-			to_chat(user, span_notice("[src] sinks into the [dunk_test_container]!"))
+			to_chat(user, span_notice("[src] 沉入 [dunk_test_container]!"))
 	else
 		..()
 
@@ -136,7 +138,7 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 
 	var/obj/machinery/griddle/hit_griddle = target
 	hit_griddle.AddToGrill(broken_egg, user)
-	target.balloon_alert(user, "cracks [src] open")
+	target.balloon_alert(user, "[src]裂开")
 
 	qdel(src)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -175,8 +177,8 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	icon_state = "penguin_egg"
 
 /obj/item/food/egg/fertile
-	name = "fertile-looking egg"
-	desc = "An egg! It looks fertilized.\nQuite how you can tell this just by looking at it is a mystery."
+	name = "受精蛋"
+	desc = "一个看起来已经受精了的蛋.\nQuite how you can tell this just by looking at it is a mystery."
 	chick_throw_prob = 100
 
 /obj/item/food/egg/fertile/Initialize(mapload, loc)
@@ -193,8 +195,8 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	)
 
 /obj/item/food/friedegg
-	name = "fried egg"
-	desc = "A fried egg. Would go well with a touch of salt and pepper."
+	name = "煎蛋"
+	desc = "一个煎蛋.加一点盐和胡椒粉会不会更好."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "friedegg"
 	food_reagents = list(
@@ -203,19 +205,19 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
 	bite_consumption = 1
-	tastes = list("egg" = 4)
+	tastes = list("蛋" = 4)
 	foodtypes = MEAT | FRIED | BREAKFAST
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_1
 
 /obj/item/food/rawegg
-	name = "raw egg"
-	desc = "Supposedly good for you, if you can stomach it. Better fried."
+	name = "生鸡蛋"
+	desc = "据说对你有好处,如果你能忍受生吃的话.最好煎一下."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "rawegg"
-	food_reagents = list() // Receives all reagents from its whole egg counterpart
+	food_reagents = list() //Recieves all reagents from its whole egg counterpart
 	bite_consumption = 1
-	tastes = list("raw egg" = 6, "sliminess" = 1)
+	tastes = list("生鸡蛋" = 6, "滑溜溜" = 1)
 	eatverbs = list("gulp down")
 	foodtypes = MEAT | RAW
 	w_class = WEIGHT_CLASS_SMALL
@@ -224,8 +226,8 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	AddComponent(/datum/component/grillable, /obj/item/food/friedegg, rand(20 SECONDS, 35 SECONDS), TRUE, FALSE)
 
 /obj/item/food/boiledegg
-	name = "boiled egg"
-	desc = "A hard boiled egg."
+	name = "煮鸡蛋"
+	desc = "煮熟的鸡蛋."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "egg"
 	inhand_icon_state = "egg"
@@ -233,7 +235,7 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 		/datum/reagent/consumable/nutriment/protein = 3,
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
-	tastes = list("egg" = 1)
+	tastes = list("煮蛋" = 1)
 	foodtypes = MEAT | BREAKFAST
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
@@ -242,25 +244,25 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	crafting_complexity = FOOD_COMPLEXITY_1
 
 /obj/item/food/eggsausage
-	name = "egg with sausage"
-	desc = "A good egg with a side of sausages."
+	name = "香肠煎蛋"
+	desc = "一个鸡蛋配上香肠."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "eggsausage"
 	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 8, /datum/reagent/consumable/nutriment/vitamin = 2, /datum/reagent/consumable/nutriment = 4)
 	foodtypes = MEAT | FRIED | BREAKFAST
-	tastes = list("egg" = 4, "meat" = 4)
+	tastes = list("煎蛋" = 4, "香肠" = 4)
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/boiledegg/rotten
 	food_reagents = list(/datum/reagent/consumable/eggrot = 10)
-	tastes = list("rotten egg" = 1)
+	tastes = list("臭鸡蛋" = 1)
 	foodtypes = GROSS
 	preserved_food = TRUE
 
 /obj/item/food/omelette //FUCK THIS
-	name = "omelette du fromage"
-	desc = "That's all you can say!"
+	name = "奶酪煎蛋卷"
+	desc = "这就是你所能言明的一切!"
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "omelette"
 	food_reagents = list(
@@ -269,7 +271,7 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	)
 	bite_consumption = 1
 	w_class = WEIGHT_CLASS_SMALL
-	tastes = list("egg" = 1, "cheese" = 1)
+	tastes = list("鸡蛋" = 1, "奶酪" = 1)
 	foodtypes = MEAT | BREAKFAST | DAIRY
 	venue_value = FOOD_PRICE_CHEAP
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -278,11 +280,11 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	if(istype(item, /obj/item/kitchen/fork))
 		var/obj/item/kitchen/fork/fork = item
 		if(fork.forkload)
-			to_chat(user, span_warning("You already have omelette on your fork!"))
+			to_chat(user, span_warning("你的叉子上已经有煎蛋卷了!"))
 		else
 			fork.icon_state = "forkloaded"
-			user.visible_message(span_notice("[user] takes a piece of omelette with [user.p_their()] fork!"), \
-				span_notice("You take a piece of omelette with your fork."))
+			user.visible_message(span_notice("[user] 用叉子叉起了一个煎蛋卷!"), \
+				span_notice("你用叉子叉起一块煎蛋卷."))
 
 			var/datum/reagent/reagent = pick(reagents.reagent_list)
 			reagents.remove_reagent(reagent.type, 1)
@@ -293,8 +295,8 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	..()
 
 /obj/item/food/benedict
-	name = "eggs benedict"
-	desc = "There is only one egg on this, how rude."
+	name = "班尼迪克蛋"
+	desc = "这上面只有一个鸡蛋,真不像话."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "benedict"
 	food_reagents = list(
@@ -303,14 +305,14 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 		/datum/reagent/consumable/nutriment = 3,
 	)
 	w_class = WEIGHT_CLASS_SMALL
-	tastes = list("egg" = 1, "bacon" = 1, "bun" = 1)
+	tastes = list("鸡蛋" = 1, "培根" = 1, "圆面包" = 1)
 	foodtypes = MEAT | BREAKFAST | GRAIN
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/eggwrap
-	name = "egg wrap"
-	desc = "The precursor to Pigs in a Blanket."
+	name = "鸡蛋卷"
+	desc = "'毛毯里的猪'的前身."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "eggwrap"
 	food_reagents = list(
@@ -318,14 +320,14 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 		/datum/reagent/consumable/nutriment/protein = 2,
 		/datum/reagent/consumable/nutriment/vitamin = 3,
 	)
-	tastes = list("egg" = 1)
+	tastes = list("鸡蛋" = 1)
 	foodtypes = MEAT | VEGETABLES
 	w_class = WEIGHT_CLASS_TINY
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/chawanmushi
-	name = "chawanmushi"
-	desc = "A legendary egg custard that makes friends out of enemies. Probably too hot for a cat to eat."
+	name = "日式蒸蛋"
+	desc = "传说中的蒸蛋能化敌为友,但对猫来说可能太热了."
 	icon = 'icons/obj/food/egg.dmi'
 	icon_state = "chawanmushi"
 	food_reagents = list(
@@ -333,6 +335,6 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 		/datum/reagent/consumable/nutriment/protein = 3,
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
-	tastes = list("custard" = 1)
+	tastes = list("蒸蛋" = 1)
 	foodtypes = MEAT | VEGETABLES
 	crafting_complexity = FOOD_COMPLEXITY_3
