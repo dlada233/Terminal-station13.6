@@ -21,8 +21,8 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 ))
 
 /obj/item/radio/headset
-	name = "radio headset"
-	desc = "An updated, modular intercom that fits over the head. Takes encryption keys."
+	name = "无线电耳机"
+	desc = "本质上是可以带在头上的对讲机，插入对应的密钥以解锁对应的通话频道。"
 	icon = 'icons/obj/clothing/headsets.dmi'
 	icon_state = "headset"
 	inhand_icon_state = "headset"
@@ -54,7 +54,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 	if(item_flags & IN_INVENTORY && loc == user)
 		// construction of frequency description
-		var/list/avail_chans = list("Use [RADIO_KEY_COMMON] for the currently tuned frequency")
+		var/list/avail_chans = list("使用[RADIO_KEY_COMMON]为当前的信号频率")
 		if(translate_binary)
 			avail_chans += "use [MODE_TOKEN_BINARY] for [MODE_BINARY]"
 		if(length(channels))
@@ -63,12 +63,12 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 					avail_chans += "use [MODE_TOKEN_DEPARTMENT] or [GLOB.channel_tokens[channels[i]]] for [lowertext(channels[i])]"
 				else
 					avail_chans += "use [GLOB.channel_tokens[channels[i]]] for [lowertext(channels[i])]"
-		. += span_notice("A small screen on the headset displays the following available frequencies:\n[english_list(avail_chans)].")
-
+		. += span_notice("耳机上的一个小屏幕显示了以下可用频率:\n[english_list(avail_chans)].")
+//chiese_list??
 		if(command)
-			. += span_info("Alt-click to toggle the high-volume mode.")
+			. += span_info("按Alt并单击以切换到高音量模式.")
 	else
-		. += span_notice("A small screen on the headset flashes, it's too small to read without holding or wearing the headset.")
+		. += span_notice("耳机上的一个小屏幕在闪烁，它太小了，如果不拿在手里或戴着耳机就无法看清。")
 
 /obj/item/radio/headset/Initialize(mapload)
 	. = ..()
@@ -127,8 +127,8 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	make_syndie()
 
 /obj/item/radio/headset/syndicate/alt //undisguised bowman with flash protection
-	name = "syndicate headset"
-	desc = "A syndicate headset that can be used to hear all radio frequencies. Protects ears from flashbangs."
+	name = "辛迪加无线电耳机"
+	desc = "一个可以听到所有无线电频率的耳机，并保护耳朵不受闪光弹的伤害."
 	icon_state = "syndie_headset"
 	worn_icon_state = "syndie_headset"
 
@@ -137,22 +137,22 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
 /obj/item/radio/headset/syndicate/alt/leader
-	name = "team leader headset"
+	name = "队长耳机"
 	command = TRUE
 
 /obj/item/radio/headset/binary
 	keyslot = /obj/item/encryptionkey/binary
 
 /obj/item/radio/headset/headset_sec
-	name = "security radio headset"
-	desc = "This is used by your elite security force."
+	name = "安保无线电耳机"
+	desc = "被你们的精锐安保部队使用."
 	icon_state = "sec_headset"
 	worn_icon_state = "sec_headset"
 	keyslot = /obj/item/encryptionkey/headset_sec
 
 /obj/item/radio/headset/headset_sec/alt
-	name = "security bowman headset"
-	desc = "This is used by your elite security force. Protects ears from flashbangs."
+	name = "安保头戴式耳机"
+	desc = "被你们的精锐安保部队使用，保护耳朵不受闪光弹的伤害."
 	icon_state = "sec_headset_alt"
 	worn_icon_state = "sec_headset_alt"
 
@@ -161,57 +161,57 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
 /obj/item/radio/headset/headset_eng
-	name = "engineering radio headset"
-	desc = "When the engineers wish to chat like girls."
+	name = "工程无线电耳机"
+	desc = "当工程师们希望像女孩一样聊天的时候."
 	icon_state = "eng_headset"
 	worn_icon_state = "eng_headset"
 	keyslot = /obj/item/encryptionkey/headset_eng
 
 /obj/item/radio/headset/headset_rob
-	name = "robotics radio headset"
-	desc = "Made specifically for the roboticists, who cannot decide between departments."
+	name = "机器人无线电耳机"
+	desc = "专门为机器人专家制作的."
 	icon_state = "rob_headset"
 	worn_icon_state = "rob_headset"
 	keyslot = /obj/item/encryptionkey/headset_rob
 
 /obj/item/radio/headset/headset_med
-	name = "medical radio headset"
-	desc = "A headset for the trained staff of the medbay."
+	name = "医疗无线电耳机"
+	desc = "训练有素的医生们的耳机."
 	icon_state = "med_headset"
 	worn_icon_state = "med_headset"
 	keyslot = /obj/item/encryptionkey/headset_med
 
 /obj/item/radio/headset/headset_sci
-	name = "science radio headset"
-	desc = "A sciency headset. Like usual."
+	name = "科研无线电耳机"
+	desc = "科研部门的耳机."
 	icon_state = "sci_headset"
 	worn_icon_state = "sci_headset"
 	keyslot = /obj/item/encryptionkey/headset_sci
 
 /obj/item/radio/headset/headset_medsci
-	name = "medical research radio headset"
-	desc = "A headset that is a result of the mating between medical and science."
+	name = "医学研究无线电耳机"
+	desc = "这款耳机是医学和科学结合的产物."
 	icon_state = "medsci_headset"
 	worn_icon_state = "medsci_headset"
 	keyslot = /obj/item/encryptionkey/headset_medsci
 
 /obj/item/radio/headset/headset_srvsec
-	name = "law and order headset"
-	desc = "In the criminal justice headset, the encryption key represents two separate but equally important groups. Sec, who investigate crime, and Service, who provide services. These are their comms."
+	name = "法务无线电耳机"
+	desc = "在法务耳机中，加密密钥接通两个独立但同等重要的部门，一个是Sec负责调查犯罪，一个是Service负责提供服务，这些是他们的通讯。"
 	icon_state = "srvsec_headset"
 	worn_icon_state = "srvsec_headset"
 	keyslot = /obj/item/encryptionkey/headset_srvsec
 
 /obj/item/radio/headset/headset_srvmed
-	name = "service medical headset"
-	desc = "A headset allowing the wearer to communicate with medbay and service."
+	name = "服务医疗无线电耳机"
+	desc = "允许佩戴者与医疗部和服务部进行通信."
 	icon_state = "srv_headset"
 	worn_icon_state = "srv_headset"
 	keyslot = /obj/item/encryptionkey/headset_srvmed
 
 /obj/item/radio/headset/headset_com
-	name = "command radio headset"
-	desc = "A headset with a commanding channel."
+	name = "指挥无线电耳机"
+	desc = "接通指挥频道的无线电耳机."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/headset_com
@@ -220,15 +220,15 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	command = TRUE
 
 /obj/item/radio/headset/heads/captain
-	name = "\proper the captain's headset"
-	desc = "The headset of the king."
+	name = "\proper 舰长的耳机"
+	desc = "为空间站的王而打造的耳机."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/heads/captain
 
 /obj/item/radio/headset/heads/captain/alt
-	name = "\proper the captain's bowman headset"
-	desc = "The headset of the boss. Protects ears from flashbangs."
+	name = "\proper 舰长的战术耳机"
+	desc = "空间站老大的耳机，具有保护听觉的功能."
 	icon_state = "com_headset_alt"
 	worn_icon_state = "com_headset_alt"
 
@@ -237,22 +237,22 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
 /obj/item/radio/headset/heads/rd
-	name = "\proper the research director's headset"
-	desc = "Headset of the fellow who keeps society marching towards technological singularity."
+	name = "\proper 研究主管的耳机"
+	desc = "佩戴者使社会向着技术奇点前进."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/heads/rd
 
 /obj/item/radio/headset/heads/hos
-	name = "\proper the head of security's headset"
-	desc = "The headset of the man in charge of keeping order and protecting the station."
+	name = "\proper 安保部长的耳机"
+	desc = "负责维持秩序和保护空间站的人戴的耳机."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/heads/hos
 
 /obj/item/radio/headset/heads/hos/alt
-	name = "\proper the head of security's bowman headset"
-	desc = "The headset of the man in charge of keeping order and protecting the station. Protects ears from flashbangs."
+	name = "\proper 安保部长的战术耳机"
+	desc = "负责维持秩序和保护空间站的人戴的耳机.对听觉有保护作用."
 	icon_state = "com_headset_alt"
 	worn_icon_state = "com_headset_alt"
 
@@ -261,43 +261,43 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
 /obj/item/radio/headset/heads/ce
-	name = "\proper the chief engineer's headset"
-	desc = "The headset of the guy in charge of keeping the station powered and undamaged."
+	name = "\proper 工程部长的耳机"
+	desc = "负责保证空间站正常运转的人的耳机."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/heads/ce
 
 /obj/item/radio/headset/heads/cmo
-	name = "\proper the chief medical officer's headset"
-	desc = "The headset of the highly trained medical chief."
+	name = "\proper 医疗部长的耳机"
+	desc = "训练有素的医疗主任的耳机."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/heads/cmo
 
 /obj/item/radio/headset/heads/hop
-	name = "\proper the head of personnel's headset"
-	desc = "The headset of the guy who will one day be captain."
+	name = "\proper 人事部长的耳机"
+	desc = "有一天会成为船长的人的耳机."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/heads/hop
 
 /obj/item/radio/headset/heads/qm
-	name = "\proper the quartermaster's headset"
-	desc = "The headset of the guy who runs the cargo department."
+	name = "\proper 军需官的耳机"
+	desc = "军火之王的耳机."
 	icon_state = "com_headset"
 	worn_icon_state = "com_headset"
 	keyslot = /obj/item/encryptionkey/heads/qm
 
 /obj/item/radio/headset/headset_cargo
-	name = "supply radio headset"
-	desc = "A headset used by the QM's slaves."
+	name = "补给无线电耳机"
+	desc = "给军需官的奴隶们带的耳机."
 	icon_state = "cargo_headset"
 	worn_icon_state = "cargo_headset"
 	keyslot = /obj/item/encryptionkey/headset_cargo
 
 /obj/item/radio/headset/headset_cargo/mining
-	name = "mining radio headset"
-	desc = "Headset used by shaft miners."
+	name = "矿工无线电耳机"
+	desc = "被竖井矿工所佩戴的耳机."
 	icon_state = "mine_headset"
 	worn_icon_state = "mine_headset"
 	// "puts the antenna down" while the headset is off
@@ -306,15 +306,15 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	keyslot = /obj/item/encryptionkey/headset_mining
 
 /obj/item/radio/headset/headset_srv
-	name = "service radio headset"
-	desc = "Headset used by the service staff, tasked with keeping the station full, happy and clean."
+	name = "服务无线电耳机"
+	desc = "由服务人员使用，其任务是保持站点的完整、愉快和清洁."
 	icon_state = "srv_headset"
 	worn_icon_state = "srv_headset"
 	keyslot = /obj/item/encryptionkey/headset_service
 
 /obj/item/radio/headset/headset_cent
-	name = "\improper CentCom headset"
-	desc = "A headset used by the upper echelons of Nanotrasen."
+	name = "\improper 中央指挥部无线电耳机"
+	desc = "接通纳米高层."
 	icon_state = "cent_headset"
 	worn_icon_state = "cent_headset"
 	keyslot = /obj/item/encryptionkey/headset_cent
@@ -328,8 +328,8 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	keyslot2 = /obj/item/encryptionkey/heads/captain
 
 /obj/item/radio/headset/headset_cent/alt
-	name = "\improper CentCom bowman headset"
-	desc = "A headset especially for emergency response personnel. Protects ears from flashbangs."
+	name = "\improper 中央指挥部无线电耳机"
+	desc = "被应急响应部队使用.对听力有保护功能."
 	icon_state = "cent_headset_alt"
 	worn_icon_state = "cent_headset_alt"
 	keyslot2 = null
@@ -339,17 +339,17 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
 /obj/item/radio/headset/silicon/pai
-	name = "\proper mini Integrated Subspace Transceiver "
+	name = "\proper 迷你集成子空间收发器 "
 	subspace_transmission = FALSE
 
 
 /obj/item/radio/headset/silicon/ai
-	name = "\proper Integrated Subspace Transceiver "
+	name = "\proper 集成子空间收发器 "
 	keyslot2 = new /obj/item/encryptionkey/ai
 	command = TRUE
 
 /obj/item/radio/headset/silicon/ai/evil
-	name = "\proper Evil Integrated Subspace Transceiver "
+	name = "\proper EVIL集成子空间收发器 "
 	keyslot2 = new /obj/item/encryptionkey/ai/evil
 	command = FALSE
 
@@ -371,17 +371,19 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 			keyslot2 = null
 
 		recalculateChannels()
-		to_chat(user, span_notice("You pop out the encryption keys in the headset."))
+		to_chat(user, span_notice("你拿出耳机里的加密密钥."))
 
 	else
-		to_chat(user, span_warning("This headset doesn't have any unique encryption keys! How useless..."))
+		to_chat(user, span_warning("这耳机没有任何特殊的加密密钥! 真没用..."))
 	tool.play_tool_sound(src, 10)
 	return TRUE
 
 /obj/item/radio/headset/attackby(obj/item/W, mob/user, params)
+	user.set_machine(src)
+
 	if(istype(W, /obj/item/encryptionkey))
 		if(keyslot && keyslot2)
-			to_chat(user, span_warning("The headset can't hold another key!"))
+			to_chat(user, span_warning("这耳机装不下更多密钥了!"))
 			return
 
 		if(!keyslot)
@@ -439,4 +441,4 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 		return
 	if (command)
 		use_command = !use_command
-		to_chat(user, span_notice("You toggle high-volume mode [use_command ? "on" : "off"]."))
+		to_chat(user, span_notice("你切换高音模式 [use_command ? "on" : "off"]."))

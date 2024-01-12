@@ -1,12 +1,12 @@
 /obj/item/sequence_scanner
-	name = "genetic sequence scanner"
+	name = "基因序列扫描器"
 	icon = 'icons/obj/devices/scanner.dmi'
 	icon_state = "gene"
 	inhand_icon_state = "healthanalyzer"
 	worn_icon_state = "healthanalyzer"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	desc = "A hand-held scanner for analyzing someones gene sequence on the fly. Use on a DNA console to update the internal database."
+	desc = "一种用于扫描并分析对象DNA序列的手持式扫描仪，在DNA控制台上使用以更新内部数据库."
 	obj_flags = CONDUCTS_ELECTRICITY
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
@@ -25,7 +25,7 @@
 
 /obj/item/sequence_scanner/examine(mob/user)
 	. = ..()
-	. += span_notice("Use primary attack to scan mutations, Secondary attack to scan genetic makeup")
+	. += span_notice("使用主要攻击来扫描突变，次要攻击来扫描基因组成") // Use primary attack to scan mutations, Secondary attack to scan genetic makeup
 	if(LAZYLEN(genetic_makeup_buffer) > 0)
 		. += span_notice("It has the genetic makeup of \"[genetic_makeup_buffer["name"]]\" stored inside its buffer")
 

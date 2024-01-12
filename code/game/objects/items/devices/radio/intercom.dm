@@ -1,6 +1,6 @@
 /obj/item/radio/intercom //ICON OVERRIDEN IN SKYRAT AESTHETICS - SEE MODULE
-	name = "station intercom"
-	desc = "A trusty station intercom, ready to spring into action even when the headsets go silent."
+	name = "无线电台"
+	desc = "一个值得信赖的无线电电台,在没有耳机的情况下也能够投入使用."
 	icon = 'icons/obj/machines/wallmounts.dmi'
 	icon_state = "intercom"
 	anchored = TRUE
@@ -23,8 +23,8 @@
 	unscrewed = TRUE
 
 /obj/item/radio/intercom/prison
-	name = "receive-only intercom"
-	desc = "A station intercom. It looks like it has been modified to not broadcast."
+	name = "收音机"
+	desc = "原本是个对讲机，不过已经被改造成只能收音了."
 	icon_state = "intercom_prison"
 	icon_off = "intercom_prison-p"
 
@@ -49,43 +49,43 @@
 
 /obj/item/radio/intercom/examine(mob/user)
 	. = ..()
-	. += span_notice("Use [MODE_TOKEN_INTERCOM] when nearby to speak into it.")
+	. += span_notice("使用[MODE_TOKEN_INTERCOM]时，需在附近的时候对着它说话.")
 	if(!unscrewed)
-		. += span_notice("It's <b>screwed</b> and secured to the wall.")
+		. += span_notice("它是用<b>螺丝钉<b>固定在墙上的.")
 	else
-		. += span_notice("It's <i>unscrewed</i> from the wall, and can be <b>detached</b>.")
+		. += span_notice("它的<b>螺丝钉<b>已经松了，可以被取下来.")
 
 	if(anonymize)
-		. += span_notice("Speaking through this intercom will anonymize your voice.")
+		. += span_notice("如果你通过这个无线电说话，别人将认不出你的声音.")
 
 	if(freqlock == RADIO_FREQENCY_UNLOCKED)
 		if(obj_flags & EMAGGED)
-			. += span_warning("Its frequency lock has been shorted...")
+			. += span_warning("它的频率锁被短路了...")
 	else
-		. += span_notice("It has a frequency lock set to [frequency/10].")
+		. += span_notice("它的频率被锁定在[frequency/10].")
 
 /obj/item/radio/intercom/screwdriver_act(mob/living/user, obj/item/tool)
 	if(unscrewed)
-		user.visible_message(span_notice("[user] starts tightening [src]'s screws..."), span_notice("You start screwing in [src]..."))
+		user.visible_message(span_notice("[user]开始拧紧[src]的螺丝..."), span_notice("你开始拧紧[src]的螺丝..."))
 		if(tool.use_tool(src, user, 30, volume=50))
-			user.visible_message(span_notice("[user] tightens [src]'s screws!"), span_notice("You tighten [src]'s screws."))
+			user.visible_message(span_notice("[user]拧紧了[src]的螺丝!"), span_notice("你拧紧了[src]的螺丝."))
 			unscrewed = FALSE
 	else
-		user.visible_message(span_notice("[user] starts loosening [src]'s screws..."), span_notice("You start unscrewing [src]..."))
+		user.visible_message(span_notice("[user]开始拧开[src]的螺丝..."), span_notice("你开始拧开[src]的螺丝..."))
 		if(tool.use_tool(src, user, 40, volume=50))
-			user.visible_message(span_notice("[user] loosens [src]'s screws!"), span_notice("You unscrew [src], loosening it from the wall."))
+			user.visible_message(span_notice("[user]拧开了[src]的螺丝!"), span_notice("你拧开了[src]的螺丝."))
 			unscrewed = TRUE
 	return TRUE
 
 /obj/item/radio/intercom/wrench_act(mob/living/user, obj/item/tool)
 	. = TRUE
 	if(!unscrewed)
-		to_chat(user, span_warning("You need to unscrew [src] from the wall first!"))
+		to_chat(user, span_warning("你得先拧开[src]的螺丝!"))
 		return
-	user.visible_message(span_notice("[user] starts unsecuring [src]..."), span_notice("You start unsecuring [src]..."))
+	user.visible_message(span_notice("[user]开始拆下[src]..."), span_notice("你开始拆下[src]..."))
 	tool.play_tool_sound(src)
 	if(tool.use_tool(src, user, 80))
-		user.visible_message(span_notice("[user] unsecures [src]!"), span_notice("You detach [src] from the wall."))
+		user.visible_message(span_notice("[user]拆下了[src]!"), span_notice("你把[src]从墙上拆下来了."))
 		playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
 		knock_down()
 
@@ -145,7 +145,7 @@
 	switch(freqlock)
 		// Emagging an intercom with an emaggable lock will remove the lock
 		if(RADIO_FREQENCY_EMAGGABLE_LOCK)
-			balloon_alert(user, "frequency lock cleared")
+			balloon_alert(user, "频率锁已清除")
 			playsound(src, SFX_SPARKS, 75, TRUE, SILENCED_SOUND_EXTRARANGE)
 			freqlock = RADIO_FREQENCY_UNLOCKED
 			obj_flags |= EMAGGED
@@ -153,7 +153,7 @@
 
 		// A fully locked one will do nothing, as locked is intended to be used for stuff that should never be changed
 		if(RADIO_FREQENCY_LOCKED)
-			balloon_alert(user, "can't override frequency lock!")
+			balloon_alert(user, "不可覆写该频率锁")
 			playsound(src, 'sound/machines/buzz-two.ogg', 50, FALSE, SILENCED_SOUND_EXTRARANGE)
 			return
 
@@ -168,7 +168,7 @@
 /**
  * Proc called whenever the intercom's area loses or gains power. Responsible for setting the `on` variable and calling `update_icon()`.
  *
- * Normally called after the intercom's area receives the `COMSIG_AREA_POWER_CHANGE` signal, but it can also be called directly.
+ * Normally called after the intercom's area recieves the `COMSIG_AREA_POWER_CHANGE` signal, but it can also be called directly.
  * Arguments:
  * * source - the area that just had a power change.
  */
@@ -190,8 +190,8 @@
 
 //Created through the autolathe or through deconstructing intercoms. Can be applied to wall to make a new intercom on it!
 /obj/item/wallframe/intercom
-	name = "intercom frame"
-	desc = "A ready-to-go intercom. Just slap it on a wall and screw it in!"
+	name = "无线电台"
+	desc = "一个随时可用的无线电台,把它贴在墙上,然后拧紧螺丝!"
 	icon = 'icons/obj/machines/wallmounts.dmi'
 	icon_state = "intercom"
 	result_path = /obj/item/radio/intercom/unscrewed
@@ -201,8 +201,8 @@
 MAPPING_DIRECTIONAL_HELPERS(/obj/item/radio/intercom, 27)
 
 /obj/item/radio/intercom/chapel
-	name = "Confessional intercom"
-	desc = "Talk through this... to confess your many sins. Conceals your voice, to keep them secret."
+	name = "忏悔对讲机"
+	desc = "对它说话...承认你的罪过，它会隐藏你的身份，好让你继续保守秘密."
 	anonymize = TRUE
 	freqlock = RADIO_FREQENCY_EMAGGABLE_LOCK
 
@@ -212,8 +212,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/item/radio/intercom, 27)
 	set_broadcasting(TRUE)
 
 /obj/item/radio/intercom/command
-	name = "command intercom"
-	desc = "The command's special free-frequency intercom. It's a versatile tool that can be tuned to any frequency, granting you access to channels you're not supposed to be on. Plus, it comes equipped with a built-in voice amplifier for crystal-clear communication."
+	name = "指挥部无线电台"
+	desc = "指挥部专用的自由频率无线电台，它是一个多功能的电台，可以调到任何频率，并允许你访问你不应该在的频道。此外，它还配备了一个内置的语音放大器，用于实现水晶般清晰的通讯."
 	icon_state = "intercom_command"
 	freerange = TRUE
 	command = TRUE

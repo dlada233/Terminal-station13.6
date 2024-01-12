@@ -1,6 +1,6 @@
 /obj/item/analyzer
-	desc = "A hand-held environmental scanner which reports current gas levels."
-	name = "gas analyzer"
+	desc = "一种手持式环境扫描仪，可以报告当前的气体水平."
+	name = "大气分析仪"
 	custom_price = PAYCHECK_LOWER * 0.9
 	icon = 'icons/obj/devices/scanner.dmi'
 	icon_state = "analyzer"
@@ -21,7 +21,6 @@
 	var/cooldown_time = 250
 	var/barometer_accuracy // 0 is the best accuracy.
 	var/list/last_gasmix_data
-	var/ranged_scan_distance = 1
 
 /obj/item/analyzer/Initialize(mapload)
 	. = ..()
@@ -46,21 +45,21 @@
 
 /obj/item/analyzer/examine(mob/user)
 	. = ..()
-	. += span_notice("Right-click [src] to open the gas reference.")
-	. += span_notice("Alt-click [src] to activate the barometer function.")
+	. += span_notice("右键[src]来打开气体参考.")
+	. += span_notice("Alt并单击[src]激活气压计功能.")
 
 /obj/item/analyzer/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins to analyze [user.p_them()]self with [src]! The display shows that [user.p_theyre()] dead!"))
+	user.visible_message(span_suicide("[user]开始用[src]分析自己!屏幕显示其已死亡!"))
 	return BRUTELOSS
 
-/obj/item/analyzer/AltClick(mob/user) //Barometer output for measuring when the next storm happens
+/obj/item/analyzer/AltClick(mob/user) //Barometer output for measuring when the next storm happens 气压计输出，用于测量下一次风暴何时发生
 	..()
 
 	if(!user.can_perform_action(src, NEED_LITERACY|NEED_LIGHT))
 		return
 
 	if(cooldown)
-		to_chat(user, span_warning("[src]'s barometer function is preparing itself."))
+		to_chat(user, span_warning("[src]的气压计功能正在准备中."))
 		return
 
 	var/turf/T = get_turf(user)
@@ -72,7 +71,7 @@
 	var/datum/weather/ongoing_weather = null
 
 	if(!user_area.outdoors)
-		to_chat(user, span_warning("[src]'s barometer function won't work indoors!"))
+		to_chat(user, span_warning("[src]的气压计功能无法在室内使用!"))
 		return
 
 	for(var/V in SSweather.processing)
@@ -83,10 +82,10 @@
 
 	if(ongoing_weather)
 		if((ongoing_weather.stage == MAIN_STAGE) || (ongoing_weather.stage == WIND_DOWN_STAGE))
-			to_chat(user, span_warning("[src]'s barometer function can't trace anything while the storm is [ongoing_weather.stage == MAIN_STAGE ? "already here!" : "winding down."]"))
+			to_chat(user, span_warning("[src]的气压计功能无法追踪任何东西当风暴为[ongoing_weather.stage == MAIN_STAGE ? "已经在这了!" : "接近尾声."]"))
 			return
 
-		to_chat(user, span_notice("The next [ongoing_weather] will hit in [butchertime(ongoing_weather.next_hit_time - world.time)]."))
+		to_chat(user, span_notice("下一次的 [ongoing_weather] 的来袭时间为 [butchertime(ongoing_weather.next_hit_time - world.time)]."))
 		if(ongoing_weather.aesthetic)
 			to_chat(user, span_warning("[src]'s barometer function says that the next storm will breeze on by."))
 	else
@@ -102,7 +101,7 @@
 /obj/item/analyzer/proc/ping()
 	if(isliving(loc))
 		var/mob/living/L = loc
-		to_chat(L, span_notice("[src]'s barometer function is ready!"))
+		to_chat(L, span_notice("[src]的气压计功能准备就绪!"))
 	playsound(src, 'sound/machines/click.ogg', 100)
 	cooldown = FALSE
 
@@ -121,7 +120,7 @@
 /obj/item/analyzer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, "GasAnalyzer", "Gas Analyzer")
+		ui = new(user, src, "气体分析仪", "气体分析仪") // gasanlyzer gas anlyzer
 		ui.open()
 
 /obj/item/analyzer/ui_static_data(mob/user)
@@ -142,13 +141,6 @@
 		return
 
 	ui_interact(user)
-
-/obj/item/analyzer/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	. = ..()
-	if(!can_see(user, target, ranged_scan_distance))
-		return
-	. |= AFTERATTACK_PROCESSED_ITEM
-	atmos_scan(user, (target.return_analyzable_air() ? target : get_turf(target)))
 
 /// Called when our analyzer is used on something
 /obj/item/analyzer/proc/on_analyze(datum/source, atom/target)
@@ -198,31 +190,37 @@
 		var/thermal_energy = air.thermal_energy()
 
 		if(total_moles > 0)
-			message += span_notice("Moles: [round(total_moles, 0.01)] mol")
+			message += span_notice("摩尔量: [round(total_moles, 0.01)] mol")
 
 			var/list/cached_gases = air.gases
 			for(var/id in cached_gases)
 				var/gas_concentration = cached_gases[id][MOLES]/total_moles
 				message += span_notice("[cached_gases[id][GAS_META][META_GAS_NAME]]: [round(cached_gases[id][MOLES], 0.01)] mol ([round(gas_concentration*100, 0.01)] %)")
-			message += span_notice("Temperature: [round(temperature - T0C,0.01)] &deg;C ([round(temperature, 0.01)] K)")
-			message += span_notice("Volume: [volume] L")
-			message += span_notice("Pressure: [round(pressure, 0.01)] kPa")
-			message += span_notice("Heat Capacity: [display_joules(heat_capacity)] / K")
-			message += span_notice("Thermal Energy: [display_joules(thermal_energy)]")
+			message += span_notice("温度: [round(temperature - T0C,0.01)] &deg;C ([round(temperature, 0.01)] K)")
+			message += span_notice("气体体积: [volume] L") // volume
+			message += span_notice("压力: [round(pressure, 0.01)] kPa") // pressure
+			message += span_notice("热容: [display_joules(heat_capacity)] / K") // heat capacity
+			message += span_notice("热能: [display_joules(thermal_energy)]") // Thermal Energy
 		else
-			message += airs.len > 1 ? span_notice("This node is empty!") : span_notice("[target] is empty!")
-			message += span_notice("Volume: [volume] L") // don't want to change the order volume appears in, suck it
+			message += airs.len > 1 ? span_notice("这个节点是空的!") : span_notice("[target]是空的!")
+			message += span_notice("气体体积: [volume] L") // don't want to change the order volume appears in, suck it
 
 	// we let the join apply newlines so we do need handholding
 	to_chat(user, examine_block(jointext(message, "\n")), type = MESSAGE_TYPE_INFO)
 	return TRUE
 
 /obj/item/analyzer/ranged
-	desc = "A hand-held long-range environmental scanner which reports current gas levels."
-	name = "long-range gas analyzer"
+	desc = "一种手持式远程环境扫描仪，可以报告当前的气体水平."
+	name = "远程气体分析仪"
 	icon_state = "analyzerranged"
 	worn_icon_state = "analyzer"
 	w_class = WEIGHT_CLASS_NORMAL
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.2, /datum/material/gold = SMALL_MATERIAL_AMOUNT*3, /datum/material/bluespace=SMALL_MATERIAL_AMOUNT*2)
 	grind_results = list(/datum/reagent/mercury = 5, /datum/reagent/iron = 5, /datum/reagent/silicon = 5)
-	ranged_scan_distance = 15
+
+/obj/item/analyzer/ranged/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!can_see(user, target, 15))
+		return
+	. |= AFTERATTACK_PROCESSED_ITEM
+	atmos_scan(user, (target.return_analyzable_air() ? target : get_turf(target)))

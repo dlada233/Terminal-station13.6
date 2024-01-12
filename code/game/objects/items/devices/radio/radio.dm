@@ -2,13 +2,13 @@
 
 /obj/item/radio
 	icon = 'icons/obj/devices/voice.dmi'
-	name = "station bounced radio"
+	name = "对讲机"
 	icon_state = "walkietalkie"
 	inhand_icon_state = "walkietalkie"
 	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
 	worn_icon_state = "radio"
-	desc = "A basic handheld radio that communicates with local telecommunication networks."
+	desc = "一个与本地电信网络联系的基本对讲机."
 	dog_fashion = /datum/dog_fashion/back
 
 	obj_flags = CONDUCTS_ELECTRICITY
@@ -475,11 +475,11 @@
 /obj/item/radio/examine(mob/user)
 	. = ..()
 	if (frequency && in_range(src, user))
-		. += span_notice("It is set to broadcast over the [frequency/10] frequency.")
+		. += span_notice("它被设置为在[frequency/10]频率上通话.")
 	if (unscrewed)
-		. += span_notice("It can be attached and modified.")
+		. += span_notice("它可以进行改装.")
 	else
-		. += span_notice("It cannot be modified or attached.")
+		. += span_notice("它不可以被改装以及附加.")
 
 /obj/item/radio/update_overlays()
 	. = ..()
@@ -494,9 +494,9 @@
 	add_fingerprint(user)
 	unscrewed = !unscrewed
 	if(unscrewed)
-		to_chat(user, span_notice("The radio can now be attached and modified!"))
+		to_chat(user, span_notice("这个无线电现在可以被改装了!"))
 	else
-		to_chat(user, span_notice("The radio can no longer be modified or attached!"))
+		to_chat(user, span_notice("这个无线电不再能被改装了!"))
 
 /obj/item/radio/emp_act(severity)
 	. = ..()
@@ -505,7 +505,7 @@
 	emped++ //There's been an EMP; better count it
 	var/curremp = emped //Remember which EMP this was
 	if (listening && ismob(loc)) // if the radio is turned on and on someone's person they notice
-		to_chat(loc, span_warning("\The [src] overloads."))
+		to_chat(loc, span_warning("\The [src]已过载."))
 	for (var/ch_name in channels)
 		channels[ch_name] = 0
 	set_on(FALSE)
@@ -528,11 +528,11 @@
 //Giving borgs their own radio to have some more room to work with -Sieve
 
 /obj/item/radio/borg
-	name = "cyborg radio"
+	name = "赛博无线电"
 	subspace_transmission = TRUE
 	subspace_switchable = TRUE
 	dog_fashion = null
-	canhear_range = 0
+	canhear_range = 0 // Skyrat Edit - Stops borgs being a loudspeaker and contains it to the tile they're on
 
 /obj/item/radio/borg/resetChannels()
 	. = ..()
@@ -552,7 +552,7 @@
 
 /obj/item/radio/borg/screwdriver_act(mob/living/user, obj/item/tool)
 	if(!keyslot)
-		to_chat(user, span_warning("This radio doesn't have any encryption keys!"))
+		to_chat(user, span_warning("这台无线电没有任何加密密钥!"))
 		return
 
 	for(var/ch_name in channels)
@@ -566,14 +566,14 @@
 			keyslot = null
 
 	recalculateChannels()
-	to_chat(user, span_notice("You pop out the encryption key in the radio."))
+	to_chat(user, span_notice("你弹出了无线电的加密密钥."))
 	return ..()
 
 /obj/item/radio/borg/attackby(obj/item/attacking_item, mob/user, params)
 
 	if(istype(attacking_item, /obj/item/encryptionkey))
 		if(keyslot)
-			to_chat(user, span_warning("The radio can't hold another key!"))
+			to_chat(user, span_warning("无线电装不下更多的加密密钥了!"))
 			return
 
 		if(!keyslot)
